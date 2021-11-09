@@ -21,9 +21,9 @@ class DAG
     vector<vector<int>> graphList;
 
     // creating the Graph constroctor to take a list of edges
-    DAG (vector<edge> const &edges, int n)
+    DAG (vector<edge> const &edges, int num)
     {
-        graphList.resize(n);
+        graphList.resize(num);
 
         // adding edges to the DAG
         for(auto &edge: edges)
@@ -31,7 +31,6 @@ class DAG
             // adding in a directed graph 
             graphList[edge.start].push_back(edge.end);
         }
-
     }
 };
 
@@ -48,9 +47,20 @@ class DAG
 
 // }
 
-
-
 int main() 
 {
 
+    // creating the vecotr for the DAG
+    vector<edge> edges = 
+    {
+        {1, 2}, {1, 3}, {2, 4}, {2, 5}, {4, 6}
+    };
+
+    // number of nodes, used in the constructor
+    int num = 6;
+
+    // calling the constructor
+    DAG dag(edges, num); 
+
+    return 0;
 }
