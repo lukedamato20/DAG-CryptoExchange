@@ -18,6 +18,7 @@ struct edge
 // representing the graph object in class DAG
 class DAG
 {
+public:
     vector<vector<int>> graphList;
 
     // creating the Graph constroctor to take a list of edges
