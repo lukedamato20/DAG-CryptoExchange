@@ -1,4 +1,4 @@
-## CPS2004 - Assignment
+## CPS2004 - OOP Assignment
 
 ### Task 1 - DAG (in C++)
 
