@@ -43,14 +43,23 @@ public:
 
 // returning the list of edges 
 // DO NOT DESTROY in-memorry struct
-// void outputDAG()
-// {
-
-// }
+void outputDAG(DAG const &graph, int n)
+{
+    for(int cnt=0; cnt < n; cnt++)
+    {
+        std::cout << cnt << "->" << endl;
+        
+        // outputting the vertices 
+        for (int x: graph.graphList[cnt])
+        {
+            std::cout << x << ", ";
+        }
+        std::cout << endl;
+    }
+}
 
 int main() 
 {
-
     // creating the vecotr for the DAG
     vector<edge> edges = 
     {
@@ -62,6 +71,9 @@ int main()
 
     // calling the constructor
     DAG dag(edges, num); 
+
+    // outputting the dag formed thanks to the constructor dag
+    outputDAG(dag, num);
 
     return 0;
 }
