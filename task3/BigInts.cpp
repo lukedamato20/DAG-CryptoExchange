@@ -5,10 +5,10 @@
 
 /* Things to do:
 * PART 1:
-* - implement and overload operators +, -, shifting 
-* - templated convertion function
-* - copy constructors from int types
-* - optimize where possible
+* - implement and overload operators +, -, shifting  OK
+* - templated convertion function 
+* - copy constructors from int types  OK
+* - optimize where possible 
 * _____________________________
 * PART 2:
 * - implement operators *, /, % 
@@ -42,6 +42,8 @@ void myuint<T>::setCurrent(std::string num)
 {
   myuint<T>::number = num;
 }
+
+// ________________________________________
 
 // creating and overloading the + operator
 template <int T>
@@ -132,6 +134,52 @@ myuint<T> myuint<T>::operator<<(myuint<T> num)
 
     return resultLS;
 }
+
+// ________________________________________
+
+// creating and overloading the * operator#
+template <int T>
+myuint<T> myuint<T>::operator*(myuint<T> num)
+{
+    std::string num1 = myuint<T>::number;
+    std::string num2 = num.getCurrent();
+
+    std::string result = "";
+
+    std::vector<myuint<T>> tmpStack;
+
+    for(int cnt1 = 0; cnt1 < T; cnt1++)
+    {
+        for(int cnt2 = 0; cnt2 < T; cnt2++)
+        {
+            if(num1[cnt1] == '1' && num2[cnt2] == '1')
+            {
+                result = result + '1';
+            }
+            else 
+            {
+                result = result + '0';
+            }
+        }
+
+        myuint<T> tmpResult;
+        tmpResult.setCurrent(result);
+        tmpStack.push_back(tmpResult);
+        result = "";
+    }
+
+    // final result (value)
+    myuint<T> value(0);
+    for(int cnt = 0; cnt < tmpResult.size(); cnt++)
+    {
+        value += tmpStack.back() << cnt;
+        tmpStack.pop_back();
+    }
+
+    return value;
+}
+
+// ________________________________________
 
 int main()
 {

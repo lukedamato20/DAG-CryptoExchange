@@ -1,4 +1,5 @@
-# include <iostream>
+#include <iostream>
+#include <vector>
 
 template <int T>
 class myuint
@@ -19,7 +20,7 @@ class myuint
         myuint<T> operator>>(myuint<T> num);
         myuint<T> operator<<(myuint<T> num);
 
-        // myuint<T> operator*(myuint<T> num);
-        // myuint<T> operator/(myuint<T> num);
+        myuint<T> operator*(myuint<T> num);
+        myuint<T> operator/(myuint<T> num);
         // myuint<T> operator%(myuint<T> num);
 };
