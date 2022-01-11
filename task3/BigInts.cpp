@@ -1,28 +1,28 @@
-/*CPS2004 - OOP
-  Task 3 - Big Integers (in C++)
-  Luke D'Amato
-*/
+// CPS2004 - OOP
+// Task 3 - Big Integers (in C++)
+// Luke D'Amato
 
-/* Things to do:
-* PART 1:
-* - implement and overload operators +, -, shifting  OK
-* - templated convertion function 
-* - copy constructors from int types  OK
-* - optimize where possible    OK?
-* _____________________________
-* PART 2:
-* - implement operators *, /, %   OK
-* - overloading new operators   OK
-* - optimize where possible   OK?
-* PART 3:
-* - check if there are any design flaws + optimize code where possible     
-* - templating lib should be able to auto switch to built-in integers
-* _____________________________
-* EXTRA:
-* - research moder CPU features
-* - manupilatuion techniques to reduce overhead? (godbolt.org)
-* - take note of any design or implmentation features (efficiency)
-*/
+
+// Things to do:
+// PART 1:
+// - implement and overload operators +, -, shifting  OK
+// - templated convertion function    OK 
+// - copy constructors from int types  OK
+// - optimize where possible    OK?
+// _____________________________
+// PART 2:
+// - implement operators *, /, %   OK
+// - overloading new operators   OK
+// - optimize where possible   OK?
+// PART 3:
+// - check if there are any design flaws + optimize code where possible     
+// - templating lib should be able to auto switch to built-in integers
+// _____________________________
+// EXTRA:
+// - research moder CPU features
+// - manupilatuion techniques to reduce overhead? (godbolt.org)
+// - take note of any design or implmentation features (efficiency)
+
 
 #include <iostream>
 #include "BigInts.hpp"
@@ -41,6 +41,96 @@ template <int T>
 void myuint<T>::setCurrent(std::string num)
 {
   myuint<T>::number = num;
+}
+
+// convertion function with templates
+template <int T>
+template <typename type>
+type myuint<T>::converType()
+{
+    type value = 0;
+    int num = 0;
+
+    for (int cnt = T-1; cnt >= 0; cnt--)
+    {
+        if (myuint::number[cnt] == '1')
+        {
+            value += pow(2, num);
+        }
+        num++;
+    }
+
+    return value;
+}
+
+// ________________________________________
+
+// initializing the bool operator == (due to big integers)
+template <int T>
+bool myuint<T>::operator==(myuint<T> num)
+{
+    for (int cnt = 0; cnt < T; cnt ++)
+    {
+        if (myuint<T>::number[cnt] != num.number[cnt])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+// initializing the bool operator > (due to big integers)
+template <int T>
+bool myuint<T>::operator>(myuint<T> num)
+{
+    for (int cnt = 0; cnt < T; cnt ++)
+    {
+        if (myuint<T>::number[cnt] != num.number[cnt])
+        {
+            if (myuint<T>::number[cnt] == '1')
+            {
+                return true;
+            }
+            else 
+            {
+                return false;
+            }
+        }
+        return false;
+    }
+}
+
+// initializing the bool operator < 
+template <int T>
+bool myuint<T>::operator<(myuint<T> num)
+{
+    for (int cnt=0; cnt < T; cnt++)
+    {
+        if (myuint<T>::number[cnt] != num.number[cnt])
+        {
+            if (myuint<T>::number[cnt] == '0')
+            {
+                return true;
+            } 
+            else 
+            {
+                return false;
+            }
+        }
+    }
+    return false;
+}
+
+template <int T>
+bool myuint <T>::operator>=(myuint<T> num)
+{
+    return (*this > num || *this == num);
+}
+
+template <int T>
+bool myuint <T>::operator<=(myuint<T> num)
+{
+    return (*this < num || *this == num);
 }
 
 // ________________________________________
@@ -101,7 +191,7 @@ myuint<T> myuint<T>::operator-(myuint<T> num)
 
 // creating and overloading the >> operator
 template <int T>
-myuint<T> myuint<T>::operator>>(myuint<T> num)
+myuint<T> myuint<T>::operator>>(int num)
 {
     std::string rightShift = myuint<T>::number;
     for(int cnt = 0; cnt < num; cnt++)
@@ -120,7 +210,7 @@ myuint<T> myuint<T>::operator>>(myuint<T> num)
 
 // creating and overloading the << operator
 template <int T>
-myuint<T> myuint<T>::operator<<(myuint<T> num)
+myuint<T> myuint<T>::operator<<(int num)
 {
     std::string leftShift = myuint<T>::number;
     for(int cnt = 0; cnt < num; cnt++)
@@ -211,12 +301,18 @@ int main()
 {
     // testing code with num1 and num2 as big integer examples...
 
+    std::cout << "tst output" << std::endl;
     // creates a 1024-bit unsigned int ’5’
-    myuint<1024> num1(5);
-    std::cout << num1.getCurrent() << std::endl;
+    //myuint<1024> num1(5);
+    //std::cout << num1.getCurrent() << std::endl;
 
     // shifts it by 1000 bits and adds 23
     // ((( adding brackets to fix possible mistake?? )))
-    myuint<1024> num2 = (num1 << 1000) + 23; 
-    std::cout << num2.getCurrent() << std::endl;
+    //myuint<1024> num2 = (num1 << 1000) + 23; 
+    //std::cout << num2.getCurrent() << std::endl;
+
+    // outputting result from convertion function
+    //std::cout << num2.converType<int>() << std::endl;
+
+    //return num2.template converType<int>(); // returns 23
 }

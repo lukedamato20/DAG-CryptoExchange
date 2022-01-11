@@ -18,18 +18,25 @@ class myuint
         std::string getCurrent();
         void setCurrent(std::string num);
 
-        // to add convertion type function
-        //...
-        
+        // convertion of type template
+        template <typename type>
+        type converType();
+
+        // creating boolean operators for loops and if statements
+        bool operator==(myuint<T> num);
+        bool operator>=(myuint<T> num);        
+        bool operator<=(myuint<T> num);
+        bool operator>(myuint<T> num);
+        bool operator<(myuint<T> num);
+
         // operators
         myuint<T> operator+(myuint<T> num);
         myuint<T> operator-(myuint<T> num);
-        myuint<T> operator>>(myuint<T> num);
-        myuint<T> operator<<(myuint<T> num);
+        myuint<T> operator>>(int num);
+        myuint<T> operator<<(int num);
 
         myuint<T> operator*(myuint<T> num);
         myuint<T> operator/(myuint<T> num);
         myuint<T> operator%(myuint<T> num);
-
-
+        
 };
