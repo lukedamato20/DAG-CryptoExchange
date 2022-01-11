@@ -8,14 +8,14 @@
 * - implement and overload operators +, -, shifting  OK
 * - templated convertion function 
 * - copy constructors from int types  OK
-* - optimize where possible 
+* - optimize where possible    OK?
 * _____________________________
 * PART 2:
-* - implement operators *, /, % 
-* - overloading new operators
-* - optimize where possible
+* - implement operators *, /, %   OK
+* - overloading new operators   OK
+* - optimize where possible   OK?
 * PART 3:
-* - check if there are any design flaws + optimize code where possible 
+* - check if there are any design flaws + optimize code where possible     
 * - templating lib should be able to auto switch to built-in integers
 * _____________________________
 * EXTRA:
@@ -137,7 +137,7 @@ myuint<T> myuint<T>::operator<<(myuint<T> num)
 
 // ________________________________________
 
-// creating and overloading the * operator#
+// creating and overloading the * operator
 template <int T>
 myuint<T> myuint<T>::operator*(myuint<T> num)
 {
@@ -147,6 +147,8 @@ myuint<T> myuint<T>::operator*(myuint<T> num)
     std::string result = "";
 
     std::vector<myuint<T>> tmpStack;
+
+    myuint<T> tmpResult;
 
     for(int cnt1 = 0; cnt1 < T; cnt1++)
     {
@@ -162,7 +164,7 @@ myuint<T> myuint<T>::operator*(myuint<T> num)
             }
         }
 
-        myuint<T> tmpResult;
+        
         tmpResult.setCurrent(result);
         tmpStack.push_back(tmpResult);
         result = "";
@@ -179,15 +181,42 @@ myuint<T> myuint<T>::operator*(myuint<T> num)
     return value;
 }
 
-// ________________________________________
+// creating and overloading the / operator
+template <int T>
+myuint<T> myuint<T>::operator/(myuint<T> num)
+{
+    int cnt = 1;
 
+    while ((*this -= num) >= num)
+    {
+        cnt++;
+    }
+
+    myuint<T> result = (cnt);
+    return result;
+}
+
+// creating and overloading the % operator
+template <int T>
+myuint<T> myuint<T>::operator%(myuint<T> num)
+{
+    // only remainder needs to be calculated
+    myuint<T> result = *this;
+
+    return result;
+}
+
+// ________________________________________
 int main()
 {
+    // testing code with num1 and num2 as big integer examples...
+
     // creates a 1024-bit unsigned int ’5’
-    myuint<1024> i(5);
+    myuint<1024> num1(5);
+    std::cout << num1.getCurrent() << std::endl;
 
     // shifts it by 1000 bits and adds 23
-    // myuint<2048> j = (i << 1000) + 23; 
-
-    // return j.template convert_to<int>() // returns 23
+    // ((( adding brackets to fix possible mistake?? )))
+    myuint<1024> num2 = (num1 << 1000) + 23; 
+    std::cout << num2.getCurrent() << std::endl;
 }
