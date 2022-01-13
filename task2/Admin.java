@@ -6,5 +6,15 @@ public class Admin extends User
     }
 
     // Account type: ADMIN
+
     // Approval for trading
+    void approveBuy(RequestBuy request)
+    {
+        request.approved = true;
+    }
+
+    void approveSell(RequestSell request)
+    {
+        request.approved = true;
+    }
 }
