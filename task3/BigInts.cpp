@@ -2,7 +2,6 @@
 // Task 3 - Big Integers (in C++)
 // Luke D'Amato
 
-
 // Things to do:
 // PART 1:
 // - implement and overload operators +, -, shifting  OK
@@ -19,12 +18,12 @@
 // - templating lib should be able to auto switch to built-in integers
 // _____________________________
 // EXTRA:
-// - research moder CPU features
-// - manupilatuion techniques to reduce overhead? (godbolt.org)
+// - research moder CPU features     ?
+// - manupilatuion techniques to reduce overhead? (godbolt.org)    NOPE
 // - take note of any design or implmentation features (efficiency)
 
-
 #include <iostream>
+
 #include "BigInts.hpp"
 
 using namespace std;
@@ -42,6 +41,8 @@ void myuint<T>::setCurrent(std::string num)
 {
   myuint<T>::number = num;
 }
+
+// ________________________________________
 
 // convertion function with templates
 template <int T>
@@ -61,6 +62,32 @@ type myuint<T>::converType()
     }
 
     return value;
+}
+
+// convertion function from a decimal value to binary
+std::string converToBinary(int num)
+{
+    std::string val = "";
+
+    while (num != 0)
+    {
+        val = (num % 2 == 0 ? "0" : "1") + val;
+        num /= 2;
+    }    
+
+    return val;
+}
+
+// implementing the constructor that accepts int of type myuint 
+template <int T>
+myuint<T>::myuint(int num)
+{
+    if (T <= 0)
+    {
+        std::cerr << i.what() << "Only integers with 2^n bits are supported"
+    }
+
+    myuint<T>::number = converToBinary(num);
 }
 
 // ________________________________________

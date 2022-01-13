@@ -5,7 +5,6 @@
 template <int T>
 class myuint
 {
-
     private:
         std::string number;
 
