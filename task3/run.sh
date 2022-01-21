@@ -1,1 +1,2 @@
-./BigInts.cpp
+g++ BigInts.cpp -o BigInts
+./BigInts
