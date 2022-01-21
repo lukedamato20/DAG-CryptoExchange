@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Trader extends User 
 {
     public Trader(String id, String name, String surname, String occupation, String gender) 
@@ -12,10 +14,25 @@ public class Trader extends User
     // - BUY orders
     // - SELL orders
 
-    // request approval 
+    ArrayList<OrderBook> requests = new ArrayList<OrderBook>();
 
-    // buy order
+    // request admin for approval
+    void requestApproval()
+    {
+        RequestApproval reqApproval = new RequestApproval();
+        requests.add(reqApproval);
+    } 
 
-    // sell order
+    // request to system to buy an order
+    void requestBuy()
+    {
+
+    }
+
+    // request to system to sell an order
+    void requestSell()
+    {
+
+    }
     
 }

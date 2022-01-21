@@ -6,4 +6,6 @@ public class OrderBook
     // 
 
     // sorted data structure of orders
+
+    protected boolean approved = false;
 }
