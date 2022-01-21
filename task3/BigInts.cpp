@@ -84,7 +84,7 @@ myuint<T>::myuint(int num)
 {
     if (T <= 0)
     {
-        std::cerr << i.what() << "Only integers with 2^n bits are supported"
+        std::cerr << "Only integers with 2^n bits are supported" << std::endl;
     }
 
     myuint<T>::number = converToBinary(num);

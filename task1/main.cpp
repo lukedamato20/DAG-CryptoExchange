@@ -47,7 +47,7 @@ void outputDAG(DAG const &graph, int n)
 {
     for(int cnt=0; cnt < n; cnt++)
     {
-        std::cout << cnt << "->" << endl;
+        std::cout << cnt << "->";;
         
         // outputting the vertices 
         for (int x: graph.graphList[cnt])

@@ -1,13 +1,13 @@
 public class RequestBuy extends OrderBook
 {
-    String orderId;
+    String buyId;
 
     // getting and setting order id
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
+    public void setBuyId(String buyId) {
+        this.buyId = buyId;
     }
 
-    public String getOrderId() {
-        return OrderId;
+    public String getBuyId() {
+        return buyId;
     }
 }
